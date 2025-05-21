@@ -1377,12 +1377,15 @@ class _CupertinoActionSheetState extends State<CupertinoActionSheet> {
 /// The content of a typical action button in a [CupertinoActionSheet].
 ///
 /// This widget draws the content of a button, i.e. the text, while the
-/// background of the button is drawn by [CupertinoActionSheet]. When
-/// [focusNode] has focus, this widget will draw the background of color
-/// [focusColor].
+/// background of the button is drawn by [CupertinoActionSheet].
+///
+/// Keyboard focus is now fully supported. When the action is focused via keyboard
+/// traversal, a focus highlight will be drawn behind the button. You can customize
+/// focus behavior using the [focusNode] and [focusColor] parameters.
 ///
 /// See also:
-///
+///  * [CupertinoFocusTraversalGroup], which provides Cupertino-style focus outline
+///    for groups of widgets.
 ///  * [CupertinoActionSheet], an alert that presents the user with a set of two or
 ///    more choices related to the current context.
 class CupertinoActionSheetAction extends StatefulWidget {

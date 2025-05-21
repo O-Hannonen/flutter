@@ -8,15 +8,18 @@ import 'colors.dart';
 import 'constants.dart';
 
 /// {@template flutter.cupertino.CupertinoFocusTraversalGroup}
-/// A wrapper around [FocusTraversalGroup] to apply a Cupertino-style focus border
-/// around its child when any of child focus nodes gain focus.
+/// A wrapper around [FocusTraversalGroup] that applies a Cupertino-style
+/// focus border around its child when any descendant focus node gains focus.
 ///
 /// The focus border is drawn using a border color specified by [focusColor] and
 /// is rounded by a border radius specified by [borderRadius].
 ///
-/// See also:
+/// Use [CupertinoFocusTraversalGroup.onRect] for a rectangular border, or
+/// [CupertinoFocusTraversalGroup.onRRect] for a rounded rectangle border.
 ///
-/// * <https://developer.apple.com/design/human-interface-guidelines/focus-and-selection/>
+/// See also:
+///  * <https://developer.apple.com/design/human-interface-guidelines/focus-and-selection/>
+///  * [FocusTraversalGroup], for general focus traversal behavior.
 /// {@endtemplate}
 class CupertinoFocusTraversalGroup extends StatefulWidget {
   /// {@macro flutter.cupertino.CupertinoFocusTraversalGroup}

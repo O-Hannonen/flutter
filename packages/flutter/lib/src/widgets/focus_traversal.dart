@@ -2066,11 +2066,14 @@ class FocusTraversalGroup extends StatefulWidget {
   /// {@macro flutter.widgets.Focus.descendantsAreTraversable}
   final bool descendantsAreTraversable;
 
-  /// Handler called when any FocusNode within the [FocusTraversalGroup]
-  /// receives or looses focus.
+  /// Called when the focus state of any descendant [FocusNode] within
+  /// the [FocusTraversalGroup] changes.
   ///
-  /// Called with true if any node within the group has focus, and false
-  /// otherwise.
+  /// Invoked with `true` when any node in the group gains focus, and with
+  /// `false` when focus leaves the group entirely.
+  /// Useful for adding visual indicators (like outlines or highlights)
+  /// around groups of widgets in response to keyboard
+  /// navigation, as seen in Cupertino's [CupertinoFocusTraversalGroup].
   final ValueChanged<bool>? onFocusChange;
 
   /// The child widget of this [FocusTraversalGroup].
