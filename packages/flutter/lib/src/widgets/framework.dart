@@ -2765,7 +2765,7 @@ final class BuildScope {
   }
 
   bool _debugAssertElementInScope(Element element, Element debugBuildRoot) {
-    final bool isInScope = element._debugIsDescendantOf(debugBuildRoot) || !element.debugIsActive;
+    final bool isInScope = element._debugIsDescendantOfOrSameAs(debugBuildRoot) || !element.debugIsActive;
     if (isInScope) {
       return true;
     }
@@ -3758,12 +3758,16 @@ abstract class Element extends DiagnosticableTree implements BuildContext {
     });
   }
 
-  bool _debugIsDescendantOf(Element target) {
+  bool _debugIsDescendantOfOrSameAs(Element target) {
     Element? element = this;
     while (element != null && element.depth > target.depth) {
       element = element._parent;
     }
     return element == target;
+  }
+
+  bool _debugIsSameAs(Element target) {
+    return this == target;
   }
 
   /// The render object at (or below) this location in the tree.
@@ -5347,7 +5351,7 @@ abstract class Element extends DiagnosticableTree implements BuildContext {
       if (owner!._debugBuilding) {
         assert(owner!._debugCurrentBuildTarget != null);
         assert(owner!._debugStateLocked);
-        if (_debugIsDescendantOf(owner!._debugCurrentBuildTarget!)) {
+        if (_debugIsDescendantOfOrSameAs(owner!._debugCurrentBuildTarget!) && !_debugIsSameAs(owner!._debugCurrentBuildTarget!)) {
           return true;
         }
         final information = <DiagnosticsNode>[

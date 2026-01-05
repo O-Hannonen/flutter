@@ -2138,6 +2138,21 @@ The findRenderObject() method was called for the following element:
       expect(element.debugIsDefunct, true);
     },
   );
+
+  testWidgets('calling setState during build throws FlutterError', (WidgetTester tester) async {
+    await tester.pumpWidget(
+     const _WidgetCallingSetStateDuringBuild()
+    );
+
+    expect(
+      tester.takeException(),
+      isA<FlutterError>().having(
+        (FlutterError error) => error.message,
+        'error message',
+        contains('setState() or markNeedsBuild() called during build.')
+      ),
+    );
+  });
 }
 
 class _TestInheritedElement extends InheritedElement {
@@ -2169,6 +2184,21 @@ class _WidgetWithNoVisitChildrenElement extends StatelessElement {
     // shown when this situation occurs.
     // The superclass has the correct implementation (calling `visitor(_child)`), so
     // we don't call it here.
+  }
+}
+
+class _WidgetCallingSetStateDuringBuild extends StatefulWidget {
+  const _WidgetCallingSetStateDuringBuild();
+
+  @override
+  State<_WidgetCallingSetStateDuringBuild> createState() => _WidgetCallingSetStateDuringBuildState();
+}
+
+class _WidgetCallingSetStateDuringBuildState extends State<_WidgetCallingSetStateDuringBuild> {
+  @override
+  Widget build(BuildContext context) {
+    setState(() {});
+    return const Placeholder();
   }
 }
 
